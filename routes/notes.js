@@ -1,7 +1,7 @@
 const router = require('express').Router(); 
 const util = require('util'); 
 const fs = require('fs'); 
-const uuid = require("uuid"); 
+const uuid = require('uuid'); 
 const { format } = require('path');
 
 
@@ -9,13 +9,13 @@ const writeToFile = util.promisify(fs.writeFile);
 const readFromFile = util.promisify(fs.readFile); 
 
 
-router.get('/notes', (req, res) => {
+router.get('/', (req, res) => {
     readFromFile('./db/db.json')
     .then((data) =>
     res.json(JSON.parse(data))); 
 }) 
 
-router.post('/notes', (req, res) => { 
+router.post('/', (req, res) => { 
     const {title, text} = req.body; 
     const newNote = { 
         title, 
