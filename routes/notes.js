@@ -22,13 +22,19 @@ router.post('/', (req, res) => {
         text, 
         id: uuidv4(), 
     };
-    readFromFile('./db/db.json')
-    .then((data) =>
-    JSON.parse(data).push(newNote))
-    writeToFile('./db/db.json', JSON.parse(data))
-    res.json(JSON.parse(data))
-
+    
+    readFromFile('./db/db.json', 'utf-8').then((data) => {
+        console.log(newNote)
+        console.log(typeof(data))
+        const parsedData = JSON.parse(data); 
+        console.log(parsedData)
+    parsedData.push(newNote)
+    console.log("New Data", parsedData)
+    writeToFile('./db/db.json', JSON.stringify(parsedData))
+    res.json(JSON.parse(newNote))
+    })
 })
+
 
 // router.delete('/notes/:id', (req, res) => { 
 //     const deleteID = req.params.id; 
