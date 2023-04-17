@@ -9,7 +9,7 @@ const writeToFile = util.promisify(fs.writeFile);
 const readFromFile = util.promisify(fs.readFile); 
 
 
-router.get('/', (req, res) => {
+router.get('/api/notes', (req, res) => {
     readFromFile('./db/db.json')
     .then((data) =>
     res.json(JSON.parse(data))); 
@@ -31,7 +31,7 @@ router.post('/', (req, res) => {
     parsedData.push(newNote)
     console.log("New Data", parsedData)
     writeToFile('./db/db.json', JSON.stringify(parsedData))
-    res.json(JSON.parse(newNote))
+    res.json(JSON.parse(parsedData))
     })
 })
 
