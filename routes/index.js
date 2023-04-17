@@ -3,8 +3,8 @@ const getNotes = require('./notes')
 const api = require('./api')
 
 
-router.use('/notes', getNotes); 
-router.use('/api/notes', api); 
+router.use('./', getNotes); 
+router.use('./notes', api); 
 
 
 module.exports = router;
