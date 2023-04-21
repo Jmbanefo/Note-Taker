@@ -36,12 +36,14 @@ router.post('/notes', (req, res) => {
 })
 
 
-// router.delete('/notes/:id', (req, res) => { 
-//     const deleteID = req.params.id; 
-//     const noted = JSON.parse(fs.readFileSync("./db/db.json", "utf8")); 
-//     fs.
+router.delete('/notes/:id', (req, res) => { 
+    const deleteID = req.params.id; 
+    const noted = JSON.parse(fs.readFileSync("./db/db.json", "utf8")); 
+    const deletedNote = noted.filter((noted) => noted.id !== deleteID); 
+    fs.writeFile("./db/db.json", JSON.stringify(deletedNote)); 
+    res.json(deletedNote)
 
-// })
+}) // check delete
 
 module.exports = router;
 
