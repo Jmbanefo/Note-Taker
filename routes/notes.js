@@ -3,6 +3,7 @@ const util = require('util');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 const { format } = require('path');
+const { log } = require('console');
 
 
 const writeToFile = util.promisify(fs.writeFile);
@@ -38,9 +39,16 @@ router.post('/notes', (req, res) => {
 
 router.delete('/notes/:id', (req, res) => { 
     const deleteID = req.params.id; 
+    console.log(deleteID)
     const noted = JSON.parse(fs.readFileSync("./db/db.json", "utf8")); 
+    console.log(noted)
     const deletedNote = noted.filter((noted) => noted.id !== deleteID); 
-    fs.writeFile("./db/db.json", JSON.stringify(deletedNote)); 
+    console.log(deletedNote);
+    fs.writeFile("./db/db.json", JSON.stringify(deletedNote), (err) => {
+        if(err) {
+            console.log(err)
+        }
+    }); 
     res.json(deletedNote)
 
 }) 
