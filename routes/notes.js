@@ -43,7 +43,7 @@ router.delete('/notes/:id', (req, res) => {
     fs.writeFile("./db/db.json", JSON.stringify(deletedNote)); 
     res.json(deletedNote)
 
-}) // check delete
+}) 
 
 module.exports = router;
 
